@@ -50,7 +50,7 @@ At this current moment in time, custom Auth drivers written for the base Auth cl
 Firstly you want to include this package in your composer.json file.
 ```javascript
     "require": {
-    		"esalazarv/multiauth" : "4.0.*"
+    		"esalazarv/multiauth" : "4.1.*"
     }
 ```
 
