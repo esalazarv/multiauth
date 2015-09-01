@@ -1,6 +1,8 @@
 # Laravel Multi Auth #
 
 - **Laravel**: 5
+- **Author**: Eduardo Salazar
+- **Author Homepage**: https://github.com/esalazarv
 - **Author**: Ramon Ackermann
 - **Author Homepage**: https://github.com/sboo
 - **Author**: Ollie Read
@@ -33,7 +35,7 @@ that sits between your code and the library.
 
 Think of it as a factory class for Auth. Now, instead of having a single table/model to
 authenticate users against, you can now have multiple, and unlike the previous version of
-this package, you have access to all functions, and can even use a different driver 
+this package, you have access to all functions, and can even use a different driver
 for each user type.
 
 On top of that, you can use multiple authentication types, simultaneously, so you can be logged
@@ -48,10 +50,10 @@ At this current moment in time, custom Auth drivers written for the base Auth cl
 Firstly you want to include this package in your composer.json file.
 ```javascript
     "require": {
-    		"sboo/multiauth" : "4.0.*"
+    		"esalazarv/multiauth" : "4.0.*"
     }
 ```
-   
+
 Now you'll want to update or install via composer.
 
     composer update
@@ -64,7 +66,7 @@ Next you open up app/config/app.php and replace the 'Illuminate\Auth\AuthService
 and 'Illuminate\Auth\Passwords\PasswordResetServiceProvider' with
 ```php
 	'Ollieread\Multiauth\Passwords\PasswordResetServiceProvider',
-```	
+```
 
 **NOTE** It is very important that you replace the default service providers.
 
@@ -115,9 +117,9 @@ Now remove the first three options (driver, model and table) and replace as foll
 
 	];
 ```
-	
-This is an example configuration. Note that you will have to create Models and migrations for each type of user. 
-Use App\User.php and 2014_10_12_000000_create_users_table.php as an example. 
+
+This is an example configuration. Note that you will have to create Models and migrations for each type of user.
+Use App\User.php and 2014_10_12_000000_create_users_table.php as an example.
 
 If you wish to use a reminders email view per usertype, simply add an email option to the type, as shown in the above example.
 
@@ -131,7 +133,7 @@ Likewise, if you want to clear all reminders, you have to run the following comm
 	php artisan multiauth:clear-resets
 
 
-You will also need to change the existing default Laravel 5 files to accommodate multiple auth and password types. 
+You will also need to change the existing default Laravel 5 files to accommodate multiple auth and password types.
 Do as described in this gist:
 
 https://gist.github.com/sboo/10943f39429b001dd9d0
@@ -188,5 +190,5 @@ Laravel integration/controller testing implements `$this->be($user)` to the base
 
 ### License
 
-This package inherits the licensing of its parent framework, Laravel, and as such is open-sourced 
+This package inherits the licensing of its parent framework, Laravel, and as such is open-sourced
 software licensed under the [MIT license](http://opensource.org/licenses/MIT)
