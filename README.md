@@ -1,6 +1,10 @@
 # Laravel Multi Auth #
 
+<<<<<<< HEAD
 - **Laravel**: 5
+=======
+- **Laravel**: 5.1.11
+>>>>>>> develop
 - **Author**: Eduardo Salazar
 - **Author Homepage**: https://github.com/esalazarv
 - **Author**: Ramon Ackermann
@@ -8,6 +12,7 @@
 - **Author**: Ollie Read
 - **Author Homepage**: http://ollieread.com
 
+For Laravel 5.1.0 version, see Branch https://github.com/esalazarv/multiauth/tree/L5.1.0
 For Laravel 4.2 version, see https://github.com/ollieread/multiauth
 
 --------------------------------------------------------------------------------------------------
@@ -50,7 +55,11 @@ At this current moment in time, custom Auth drivers written for the base Auth cl
 Firstly you want to include this package in your composer.json file.
 ```javascript
     "require": {
+<<<<<<< HEAD
     		"esalazarv/multiauth" : "4.1.*"
+=======
+    		"esalazarv/multiauth" : "5.0.*"
+>>>>>>> develop
     }
 ```
 
@@ -140,6 +149,7 @@ https://gist.github.com/sboo/10943f39429b001dd9d0
 
 ## Usage ##
 
+
 Everything is done the exact same way as the original library, the one exception being
 that all method calls are prefixed with the key (account or user in the above examples)
 as a method itself.
@@ -155,16 +165,57 @@ as a method itself.
     Auth::admin()->check();
     Auth::client()->check();
 ```
-
 I found that have to call the user() method on a user type called user() looked messy, so
 I have added in a nice get method to wrap around it.
 ```php
 	Auth::admin()->get();
 ```
 
+
+But if you prefer, you can specify which type of user you will use to use method `uses('YourUserType')`, once this is done you can access the current user as the original Auth Facade , as easy as `Auth::user()`.
+
+This method sets 'admin' as the current user with which to work.
+```php
+	/** You can switch users as needed **/
+	Auth::uses('admin');
+```
+Note: By default current user is the first in the config array.
+
+
+You can now access the user just as you would with the original Facade Auth.
+```php
+	/** Accessing the user using the 'user()' (original method) **/
+	if(Auth::user()->check()){
+		//
+	}
+
+	/** Accessing the user using the 'get()' (additional method)  **/
+	if(Auth::get()->check()){
+		//
+	}
+```
+or using the descriptive methods that existed.
+```php
+
+	if(Auth::admin()->user()->check()){
+		//
+	}
+
+	if(Auth::admin()->get()->check()){
+		//
+	}
+```
+
+
 In the instance where you have a user type that can impersonate another user type, example being
 an admin impersonating a user to recreate or check something, I added in an impersonate() method
 which simply wraps loginUsingId() on the request user type.
+
+```php
+	Auth::impersonate('client', 1, true);
+```
+or
+
 ```php
 	Auth::admin()->impersonate('client', 1, true);
 ```
@@ -174,6 +225,32 @@ whether or not to remember the user, which will default to false, so can be left
 more often than not.
 
 And so on and so forth.
+
+Note: The method 'impersonate()' returns and sets the new user as the current user.
+
+
+You can Know if an user is impersonated
+
+```php
+	/** @return boolean **/
+	if(Auth::isImpersonated()){
+		//
+	}
+```
+or
+
+You may know the key name impersonator of current user
+```php
+	/** @return string | null **/
+	Auth::getImpersonatorName();
+```
+
+or specifying
+
+```php
+	/** @return string | null **/
+	Auth::client()->getImpersonatorName();
+```
 
 
 There we go, done! Enjoy yourselves.
