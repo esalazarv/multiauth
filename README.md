@@ -1,10 +1,6 @@
 # Laravel Multi Auth #
 
-<<<<<<< HEAD
-- **Laravel**: 5
-=======
 - **Laravel**: 5.1.11
->>>>>>> develop
 - **Author**: Eduardo Salazar
 - **Author Homepage**: https://github.com/esalazarv
 - **Author**: Ramon Ackermann
@@ -55,11 +51,7 @@ At this current moment in time, custom Auth drivers written for the base Auth cl
 Firstly you want to include this package in your composer.json file.
 ```javascript
     "require": {
-<<<<<<< HEAD
-    		"esalazarv/multiauth" : "4.1.*"
-=======
     		"esalazarv/multiauth" : "5.0.*"
->>>>>>> develop
     }
 ```
 

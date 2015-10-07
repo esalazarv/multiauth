@@ -118,11 +118,7 @@ class Guard extends OriginalGuard
       return (!is_null($this->impersonatorName));
     }
 
-<<<<<<< HEAD
-    public function getImpersonator(){
-=======
     public function getImpersonatorName(){
->>>>>>> develop
       return $this->impersonatorName;
     }
 }
