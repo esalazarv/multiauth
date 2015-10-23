@@ -1,6 +1,6 @@
 <?php namespace Ollieread\Multiauth;
 
-use Illuminate\Auth\AuthManager as OriginalAuthManager;
+use Illuminate\Support\Manager;
 use Illuminate\Auth\DatabaseUserProvider;
 use Illuminate\Auth\EloquentUserProvider;
 
@@ -8,7 +8,7 @@ use Illuminate\Auth\EloquentUserProvider;
  * Class AuthManager
  * @package Ollieread\Multiauth
  */
-class AuthManager extends OriginalAuthManager
+class AuthManager extends Manager
 {
 
     /**
@@ -36,6 +36,34 @@ class AuthManager extends OriginalAuthManager
 
         $this->config = $config;
         $this->name = $name;
+    }
+
+    /**
+     * Create a new driver instance.
+     *
+     * @param  string  $driver
+     * @return mixed
+     */
+    protected function createDriver($driver)
+    {
+        $guard = parent::createDriver($driver);
+
+        // When using the remember me functionality of the authentication services we
+        // will need to be set the encryption instance of the guard, which allows
+        // secure, encrypted cookie values to get generated for those cookies.
+        if (method_exists($guard, 'setCookieJar')) {
+            $guard->setCookieJar($this->app['cookie']);
+        }
+
+        if (method_exists($guard, 'setDispatcher')) {
+            $guard->setDispatcher($this->app['events']);
+        }
+
+        if (method_exists($guard, 'setRequest')) {
+            $guard->setRequest($this->app->refresh('request', $guard, 'setRequest'));
+        }
+
+        return $guard;
     }
 
     /**
