@@ -25,7 +25,6 @@ more specifically
 ```
 Illuminate\Foundation\Auth\AuthenticatesUsers::postLogin()
 ```
-does not work! For the time being, you need to write your own Controller for this. I will work on it if I have time.
 
 --------------------------------------------------------------------------------------------------
 
